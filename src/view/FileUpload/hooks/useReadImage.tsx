@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 export interface IFileWithPreview extends File {
   preview?: string;
 }
@@ -8,24 +8,27 @@ export interface IImageSize {
   width: number;
 }
 
-export default function useReadImage(file: IFileWithPreview[]) {
+export default function useReadImage(file: IFileWithPreview) {
+  console.log(file);
+
   const [imageSize, setImageSize] = useState<IImageSize>({
     height: 0,
     width: 0,
   });
-  const getHeightAndWidthFromDataUrl = (dataURL: string) => {
+  const getHeightAndWidthFromDataUrl = () => {
     const img = new Image();
+    img.src = file?.preview ?? "";
+
     img.onload = () => {
       setImageSize({
         height: img.height,
         width: img.width,
       });
     };
-    img.src = dataURL;
   };
-  getHeightAndWidthFromDataUrl(file[file.length - 1]?.preview ?? "");
-  return { width: imageSize.width, height: imageSize.height };
-  // console.log(file);
-  // console.log(img.width);
-  // console.log(img.height);
+  useEffect(() => {
+    getHeightAndWidthFromDataUrl();
+    console.log(imageSize);
+  }, [file]);
+  return imageSize;
 }

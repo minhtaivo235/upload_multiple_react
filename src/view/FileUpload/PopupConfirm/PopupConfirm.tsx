@@ -4,6 +4,7 @@ import { IFileWithPreview } from "../hooks/useFileUpload";
 import "./PopupConFirm.scss";
 import ListImage from "./ListImage/ListImage";
 import useReadImage from "../hooks/useReadImage";
+import useTransformToKb from "../hooks/useTransformToKb";
 
 interface PopupConfirmProps {
   files: IFileWithPreview[];
@@ -22,7 +23,8 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
     cancel(files.length - 1);
     setShow(false);
   };
-  const { width, height } = useReadImage(files);
+  const { width, height } = useReadImage(files[files.length - 1]);
+  const sizeImage = useTransformToKb(files[files.length - 1]?.size);
 
   const ActionConfirmed = () => {
     setShow(false);
@@ -38,15 +40,13 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
                 <div className="col-12 left-side_img">
                   <ListImage files={files} />
                 </div>
-                <div className="col-12 left-side_content">
+                <div className="col-12 left-side_content mt-3">
                   <h5>Thông tin ảnh</h5>
-                  <p>Kích thước gốc: </p>
-                  <p>Tên File: </p>
-                  <p>Dung lượng: </p>
-                  <p>Dung lượng: </p>
-                  <p>Dung lượng: </p>
-                  <p>Dung lượng: </p>
-                  <p>Dung lượng: </p>
+                  <p>
+                    Kích thước gốc: {width} x {height}
+                  </p>
+                  <p>Tên File: {files[files.length - 1]?.name}</p>
+                  <p>Dung lượng: {sizeImage}</p>
                 </div>
               </div>
             </div>
@@ -73,7 +73,7 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
                   </div>
                 </div>
                 <div className="main_content">
-                  <img src={files[0]?.preview} alt="" />
+                  <img src={files[files.length - 1]?.preview} alt="" />
                 </div>
               </div>
             </div>

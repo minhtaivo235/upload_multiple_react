@@ -9,8 +9,8 @@ interface ListImageProps {
 const ListImage: React.FC<ListImageProps> = ({ files }) => {
   return (
     <div className="list-image">
-      {files.map((file) => (
-        <img key={file.name} src={file.preview} alt="" />
+      {files.map((file, i) => (
+        <img key={file.name + i} src={file.preview} alt="" />
       ))}
       <div className="upload">
         <i className="fa-solid fa-cloud-arrow-up"></i>
