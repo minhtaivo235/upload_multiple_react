@@ -1,6 +1,6 @@
 import React from "react";
 import { IFileWithPreview } from "../../hooks/useFileUpload";
-import "./ListImage.scss";
+// import "./ListImage.scss";
 
 interface ListImageProps {
   files: IFileWithPreview[];

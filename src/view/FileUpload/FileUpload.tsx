@@ -1,7 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Button } from "react-bootstrap";
+import React from "react";
 import { FileUploader } from "react-drag-drop-files";
-import "./FileUpload.scss";
 import useFileUpload from "./hooks/useFileUpload";
 import PopupConfirm from "./PopupConfirm/PopupConfirm";
 import ShowImage from "./ShowImage";
@@ -9,8 +7,15 @@ import ShowImage from "./ShowImage";
 const fileTypes = ["JPG", "PNG", "GIF"];
 
 const FileUpload = () => {
-  const { files, handleChangeFiles, setConfirm, deleteFile, confirm } =
-    useFileUpload([]);
+  const {
+    files,
+    handleChangeFiles,
+    setConfirm,
+    deleteFile,
+    confirm,
+    filePreview,
+    uploadFile,
+  } = useFileUpload([]);
 
   return (
     <>
@@ -26,19 +31,21 @@ const FileUpload = () => {
         </FileUploader>
 
         <div className="upload-zone">
-          {!confirm && <ShowImage files={files} deleteCb={deleteFile} />}
+          {files && <ShowImage files={files} deleteCb={deleteFile} />}
           <i className="fa-solid fa-cloud-arrow-up"></i>
           <p>
             <span>Tải ảnh </span>hoặc kéo thả để thêm ảnh
           </p>
         </div>
       </div>
-      <PopupConfirm
-        show={confirm}
-        files={files}
-        setShow={setConfirm}
-        cancel={deleteFile}
-      />
+      {confirm && (
+        <PopupConfirm
+          show={confirm}
+          file={filePreview}
+          setShow={setConfirm}
+          uploadFile={uploadFile}
+        />
+      )}
     </>
   );
 };

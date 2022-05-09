@@ -1,16 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-export interface IFileWithPreview extends File {
-  preview?: string;
-}
+import { FileUploadType } from "./useFileUpload";
 
 export interface IImageSize {
   height: number;
   width: number;
 }
 
-export default function useReadImage(file: IFileWithPreview) {
-  console.log(file);
-
+export default function useReadImage(file: FileUploadType | undefined) {
   const [imageSize, setImageSize] = useState<IImageSize>({
     height: 0,
     width: 0,
@@ -28,7 +24,6 @@ export default function useReadImage(file: IFileWithPreview) {
   };
   useEffect(() => {
     getHeightAndWidthFromDataUrl();
-    console.log(imageSize);
   }, [file]);
   return imageSize;
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import "./Image.scss";
 interface IProps {
   src: string | undefined;
   deleteCb: () => void;
