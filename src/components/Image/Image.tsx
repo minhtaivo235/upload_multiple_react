@@ -7,7 +7,7 @@ interface IProps {
 
 const Image: React.FC<IProps> = ({ src, deleteCb }) => {
   return (
-    <div className="image">
+    <div className="component-image">
       <img src={src} alt="" />
       <div className="group_icon">
         <span className="p-2">

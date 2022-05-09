@@ -4,7 +4,7 @@ export interface IFileWithPreview extends File {
 }
 
 export default function useFileUpload(defaultValue: IFileWithPreview[]) {
-  const [files, setFile] = useState(defaultValue);
+  const [files, setFile] = useState<IFileWithPreview[]>(defaultValue);
   const [confirm, setConfirm] = useState(false);
 
   const handleChangeFiles = (file: IFileWithPreview) => {
@@ -19,7 +19,14 @@ export default function useFileUpload(defaultValue: IFileWithPreview[]) {
 
   const deleteFile = (index: number) => {
     setFile(files.filter((item, ind) => ind !== index));
+    setConfirm(false);
   };
 
-  return { files: files, handleChangeFiles, setConfirm, deleteFile, confirm };
+  return {
+    files,
+    handleChangeFiles,
+    setConfirm,
+    deleteFile,
+    confirm,
+  };
 }

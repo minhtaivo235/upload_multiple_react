@@ -1,56 +1,62 @@
-.main_content {
-  width: 100%;
-  max-height: 600px;
-  min-height: 150px;
-  overflow: auto;
-}
-.main-control {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  select {
-    width: 100px;
-    border: 1px solid #eee;
-    padding: 4px 8px;
-    font-weight: 500;
-    border-radius: 6px;
+.popup-confirm {
+  .main_content {
+    width: 100%;
+    max-height: 600px;
+    min-height: 150px;
+    overflow: hidden;
   }
-  &_size {
+  .main-control {
     display: flex;
-    column-gap: 12px;
-    &-width, &-height {
-      color: rgb(168, 167, 167);
-      border-radius: 1px;
-      span {
-        padding: 4px 8px;
-        background-color: rgb(239 239 239);
-        border: 1px solid rgb(168, 167, 167);
+    justify-content: space-between;
+    align-items: center;
+    select {
+      width: 100px;
+      border: 1px solid #eee;
+      padding: 4px 8px;
+      font-weight: 500;
+      border-radius: 6px;
+    }
+    &_size {
+      display: flex;
+      column-gap: 12px;
+      &-width,
+      &-height {
+        color: rgb(168, 167, 167);
+        border-radius: 1px;
+        span {
+          padding: 4px 8px;
+          background-color: rgb(239 239 239);
+          border: 1px solid rgb(168, 167, 167);
+        }
+      }
+    }
+    &_cut {
+      display: flex;
+      column-gap: 10px;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+  }
+  .left-side {
+    height: 100%;
+    &_content {
+      p {
+        font-size: 12px;
+        line-height: 14px;
+        margin: unset;
+        padding: 2px 0;
       }
     }
   }
-  &_cut {
+  .right-side {
+    padding-left: 6px;
     display: flex;
-    column-gap: 10px;
-    align-items: center;
-    padding: 4px 12px;
-    border-radius: 6px;
-  }
-}
-.left-side {
-  height: 100%;
-  &_content {
-    p {
-      font-size: 12px;
-      line-height: 14px;
-      margin: unset;
-      padding: 2px 0;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    .img-preview {
+      overflow: hidden;
     }
   }
-}
-.right-side {
-  padding-left: 6px;
-  display: flex;
-  flex-direction: column;
-  align-content: space-between;
-  justify-content: space-between;
 }

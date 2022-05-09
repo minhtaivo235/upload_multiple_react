@@ -20,6 +20,7 @@ const FileUpload = () => {
           handleChange={handleChangeFiles}
           name="file"
           types={fileTypes}
+          fileOrFiles={files}
         >
           <div></div>
         </FileUploader>
