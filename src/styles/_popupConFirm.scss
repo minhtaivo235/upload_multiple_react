@@ -4,6 +4,9 @@
     max-height: 600px;
     min-height: 150px;
     overflow: hidden;
+    .cropper-disabled .cropper-drag-box {
+      cursor: default !important;
+    }
   }
   .main-control {
     display: flex;

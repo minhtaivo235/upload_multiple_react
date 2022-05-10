@@ -1,5 +1,5 @@
 import "cropperjs/dist/cropper.css";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import Cropper from "react-cropper";
 import useConfirmFile from "../hooks/useConfirmFile";
@@ -24,9 +24,14 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
   const { width, height } = useReadImage(file);
   const sizeImage = useTransformToKb(file?.size);
 
-  const { cropImage, getCropData, cropFile, initCropper } = useCropperPopup(
-    file?.name
-  );
+  const {
+    activeCrop,
+    handleActiveCrop,
+    cropImage,
+    getCropData,
+    cropFile,
+    initCropper,
+  } = useCropperPopup(file, uploadFile, setShow);
   const { ActionConfirm, ActionClose } = useConfirmFile(
     file,
     cropFile,
@@ -75,25 +80,34 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
                         <span>{height}</span>
                       </div>
                     </div>
-                    <div
-                      className="main-control_cut backgroung-gray"
-                      onClick={getCropData}
-                    >
-                      <i className="fa-solid fa-crop-simple"></i>
-                      <span>Cắt</span>
-                    </div>
+                    {activeCrop ? (
+                      <div
+                        className="main-control_cut backgroung-gray"
+                        onClick={getCropData}
+                      >
+                        <i className="fa-solid fa-crop-simple"></i>
+                        <span>Thực hiện cắt</span>
+                      </div>
+                    ) : (
+                      <div
+                        className="main-control_cut backgroung-gray"
+                        onClick={handleActiveCrop}
+                      >
+                        <i className="fa-solid fa-crop-simple"></i>
+                        <span>Cắt</span>
+                      </div>
+                    )}
                   </div>
                   <div className="main_content">
                     <Cropper
                       initialAspectRatio={1}
                       preview=".img-preview"
                       src={file?.preview}
-                      viewMode={0}
+                      viewMode={1}
                       minCropBoxHeight={10}
                       minCropBoxWidth={10}
-                      background={false}
+                      // background={true}
                       responsive={true}
-                      autoCropArea={1}
                       checkOrientation={false} // https://github.com/fengyuanchen/cropperjs/issues/671
                       onInitialized={(instance) => {
                         initCropper(instance);
@@ -108,8 +122,13 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
                     <h5 className="mb-1">Preview</h5>
                     <div
                       className="img-preview mb-3"
-                      style={{ width: "100%", float: "left", height: "300px" }}
+                      style={{
+                        width: "100%",
+                        float: "left",
+                        height: "300px",
+                      }}
                     ></div>
+
                     {cropImage && (
                       <div className="preview_img">
                         <img

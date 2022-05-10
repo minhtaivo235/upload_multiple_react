@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function useTransformBase64ToFile(
   base64Url: string,
@@ -19,8 +19,7 @@ export default function useTransformBase64ToFile(
 
     return new File([u8arr], filename, { type: mime });
   };
-
-  const handleChange = () => {
+  const handleChange = useCallback(() => {
     const file = dataURLtoFile(base64Url, fileName);
     let fileResult: File;
     if (file) {
@@ -29,7 +28,7 @@ export default function useTransformBase64ToFile(
       });
     }
     setFileResult(file);
-  };
+  }, [base64Url, fileName]);
 
   useEffect(() => {
     handleChange();
