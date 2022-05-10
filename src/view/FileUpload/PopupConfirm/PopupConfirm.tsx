@@ -31,7 +31,7 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
     getCropData,
     cropFile,
     initCropper,
-  } = useCropperPopup(file, uploadFile, setShow);
+  } = useCropperPopup(file);
   const { ActionConfirm, ActionClose } = useConfirmFile(
     file,
     cropFile,

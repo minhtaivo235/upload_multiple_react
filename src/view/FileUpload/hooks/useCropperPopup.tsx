@@ -1,13 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import { ReactCropperElement, ReactCropperProps } from "react-cropper";
+import { useEffect, useState } from "react";
 import { FileUploadType } from "./useFileUpload";
 import useTransformBase64ToFile from "./useTransformBase64ToFile";
 
-export default function useCropperPopup(
-  file: FileUploadType | undefined,
-  confirmCb: (file: FileUploadType | undefined) => void,
-  changeStateShow: (status: boolean) => void
-) {
+export default function useCropperPopup(file: FileUploadType | undefined) {
   const [activeCrop, setActiveCrop] = useState(false);
   const [cropper, setCropper] = useState<Cropper>();
   const [cropImage, setCropImage] = useState("");
@@ -18,19 +13,6 @@ export default function useCropperPopup(
       cropper.clear();
       cropper.disable();
     }
-  };
-
-  const ActionClose = () => {
-    changeStateShow(false);
-  };
-
-  const ActionConfirm = () => {
-    getCropData();
-
-    if (cropFile) {
-      confirmCb(cropFile);
-    } else confirmCb(file);
-    changeStateShow(false);
   };
 
   const getCropData = () => {
@@ -69,7 +51,5 @@ export default function useCropperPopup(
     cropFile,
     activeCrop,
     handleActiveCrop,
-    ActionClose,
-    ActionConfirm,
   };
 }
