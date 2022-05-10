@@ -80,15 +80,7 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
                         <span>{height}</span>
                       </div>
                     </div>
-                    {activeCrop ? (
-                      <div
-                        className="main-control_cut backgroung-gray"
-                        onClick={getCropData}
-                      >
-                        <i className="fa-solid fa-crop-simple"></i>
-                        <span>Thực hiện cắt</span>
-                      </div>
-                    ) : (
+                    <div className="d-flex" style={{ columnGap: "10px" }}>
                       <div
                         className="main-control_cut backgroung-gray"
                         onClick={handleActiveCrop}
@@ -96,7 +88,16 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
                         <i className="fa-solid fa-crop-simple"></i>
                         <span>Cắt</span>
                       </div>
-                    )}
+                      {activeCrop && (
+                        <div
+                          className="main-control_cut backgroung-gray"
+                          onClick={getCropData}
+                        >
+                          <i className="fa-solid fa-crop-simple"></i>
+                          <span>Thực hiện cắt</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="main_content">
                     <Cropper
@@ -120,16 +121,7 @@ const PopupConfirm: React.FC<PopupConfirmProps> = ({
                 <div className="right-side h-100">
                   <div className="right-side_top w-100">
                     <h5 className="mb-1">Preview</h5>
-                    <div
-                      className="img-preview mb-3"
-                      style={{
-                        width: "100%",
-                        float: "left",
-                        height: "300px",
-                      }}
-                    ></div>
-
-                    {cropImage && (
+                    {cropImage && !activeCrop && (
                       <div className="preview_img">
                         <img
                           style={{ width: "100%" }}
