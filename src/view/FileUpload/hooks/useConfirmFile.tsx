@@ -13,8 +13,6 @@ export default function useConfirmFile(
   changeStateShow: (status: boolean) => void
 ) {
   const ActionConfirm = () => {
-    console.log(file);
-
     if (cropFile) {
       confirmCb(cropFile);
     } else confirmCb(file);

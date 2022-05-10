@@ -20,10 +20,9 @@ export default function useTransformBase64ToFile(
     return new File([u8arr], filename, { type: mime });
   };
   const handleChange = useCallback(() => {
-    const file = dataURLtoFile(base64Url, fileName);
-    let fileResult: File;
+    let file = dataURLtoFile(base64Url, fileName);
     if (file) {
-      fileResult = Object.assign(file, {
+      file = Object.assign(file, {
         preview: URL.createObjectURL(file),
       });
     }
@@ -32,7 +31,7 @@ export default function useTransformBase64ToFile(
 
   useEffect(() => {
     handleChange();
-  }, [base64Url, fileName]);
+  }, [base64Url, fileName, handleChange]);
 
   return fileResult;
 }
