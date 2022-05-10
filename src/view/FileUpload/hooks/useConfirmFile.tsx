@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { FileUploadType } from "./useFileUpload";
 
 export interface IImageSize {
